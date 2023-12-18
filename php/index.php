@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
         $message = '<div class="disconnect"><p>Veuillez rentrer vos identifiants</p></div>';
     }
 }
-
+$message2 = '<div class="pleaseconnect"><p>Veuillez vous connecter pour accéder à ce service </p></div>';
 
 // Vérifier si l'utilisateur est connecté
 $isLoggedIn = isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'];
@@ -38,13 +38,17 @@ $isLoggedIn = isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'];
     <div class="formulaire">
         <div class="navBar">
             <ul>
-                <li class="accueil">Accueil</li>
-                <li class="user">Utilisateur</li>
-                <li class="parametres">Paramètres</li>
                 <?php if ($isLoggedIn) { ?>
-                    <li class="deconnexion"><a href="?logout">Déconnexion</a></li>
+                    <li class="accueil"><a href="page?home">Accueil</a></li>
+                    <li class="user"><a href="page?user">Utilisateur</a></li>
+                    <li class="parametres"><a href="page?setting">Paramètres</a></li>
+                    <li class="deconnexion"><a href="page?logout">Déconnexion</a></li>
                 <?php } else { ?>
-                    <li class="connexion"><a href="connexion.php">Connexion</a></li>
+                    <li class="accueil"><a href="page?home">Accueil</a></li>
+                    <li class="user"><a href="page?user">Utilisateur</a></li>
+                    <li class="parametres"><a href="page?setting">Paramètres</a></li>
+                    <li class="connexion"><a href="page?connect">Connexion</a></li>
+
                 <?php } ?>
             </ul>
         </div>
@@ -62,7 +66,9 @@ $isLoggedIn = isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'];
 
         <?php
         // Afficher la div du message après le formulaire
-        if (!empty($message)) {
+         if (!empty($message2)) {
+            echo $message2;
+        } elseif (!empty($message)) {
             echo $message;
         }
         ?>
