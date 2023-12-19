@@ -6,6 +6,10 @@ if (!isset($_SESSION['user'])) {
     $_SESSION['user'] = [
         "identifiant" => "Izaline",
         "motDePasse" => "1234",
+        "nom" => "Dhalluin",
+        "prenom" => "Izaline",
+        "age" => 25,
+        "role" => "Apprenante"
     ];
 }
 
@@ -147,6 +151,11 @@ if (isset($_GET['page']) && $_GET['page'] == 'home' && isset($_SESSION['user']['
             // Afficher la div du message après le formulaire
             if ($isLoggedIn && isset($_GET['page']) && ($_GET['page'] == 'home' || $_GET['page'] == 'settings')) {
                 echo $message;
+
+                // Afficher le message de bienvenue sur la page "Accueil"
+                if ($_GET['page'] == 'home') {
+                    echo '<div class="welcome"><p>Bienvenue ' . htmlspecialchars($currentPrenom) . ' ' . htmlspecialchars($currentNom) . '</p></div>';
+                }
             } elseif ($isLoggedIn && isset($_GET['page']) && $_GET['page'] == 'user') {
                 // Afficher les informations de l'utilisateur
                 echo $message; // Inclure le message de bienvenue
